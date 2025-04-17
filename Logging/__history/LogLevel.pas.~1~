@@ -1,0 +1,10 @@
+unit Unit4;
+
+interface
+
+type
+  TLogLevel = (llInfo, llError, llDebug);
+
+implementation
+
+end.

@@ -4,22 +4,34 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, uArrayHelper,
+  uHeapSort, uShellSort;
 
 type
   TForm1 = class(TForm)
-    Button1: TButton;
+    ShellSortButton: TButton;
     SetLengthTextBox: TEdit;
     Label1: TLabel;
-    Button2: TButton;
-    GenerateSet: TButton;
+    HeapSortButton: TButton;
+    GenerateSetButton: TButton;
     SetPanel: TRichEdit;
     Label2: TLabel;
     LogsTextBox: TRichEdit;
     Label3: TLabel;
-    procedure GenerateSetClick(Sender: TObject);
+
+    procedure GenerateSetButtonClick(Sender: TObject);
+    procedure ShellSortButtonClick(Sender: TObject);
+
+    constructor Create();
+    procedure HeapSortButtonClick(Sender: TObject);
   private
-    { Private declarations }
+    TargetSet: TArray<Integer>;
+    ShellSort1: TShellSort;
+    HeapSort1: THeapSort;
+
+    procedure EnableUI(IsEnable: BOOLEAN);
+
+
   public
     { Public declarations }
   end;
@@ -31,9 +43,56 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.GenerateSetClick(Sender: TObject);
+constructor TForm1.Create();
 begin
-  Form1.SetPanel.Text := 'lollolool';
+  ShellSort1 := TShellSort.Create;
+  HeapSort1 := THeapSort.Create;
+end;
+
+procedure TForm1.GenerateSetButtonClick(Sender: TObject);
+var
+  SetLength: Integer;
+begin
+  EnableUI(false);
+
+  SetLength := StrToIntDef(SetLengthTextBox.Text, 0);
+
+  TargetSet := nil;
+  TargetSet := tArrayHelper.CreateRandom(SetLength);
+
+  Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
+
+  EnableUI(true);
+end;
+
+procedure TForm1.HeapSortButtonClick(Sender: TObject);
+begin
+   EnableUI(false);
+
+   HeapSort1.Sort(TargetSet);
+
+   Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
+
+   EnableUI(true);
+end;
+
+procedure TForm1.ShellSortButtonClick(Sender: TObject);
+begin
+   EnableUI(false);
+
+   ShellSort1.Sort(TargetSet);
+
+   Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
+
+   EnableUI(true);
+end;
+
+procedure TForm1.EnableUI(IsEnable: BOOLEAN);
+begin
+  SetLengthTextBox.Enabled := IsEnable;
+  ShellSortButton.Enabled := IsEnable;
+  HeapSortButton.Enabled := IsEnable;
+  GenerateSetButton.Enabled := IsEnable;
 end;
 
 end.

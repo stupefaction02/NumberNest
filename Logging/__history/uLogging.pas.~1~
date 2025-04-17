@@ -1,0 +1,10 @@
+unit uLogGeneral;
+
+interface
+
+type
+  TLogLevel = (llInfo, llError, llDebug);
+
+implementation
+
+end.

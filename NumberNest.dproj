@@ -130,6 +130,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uArrayHelper.pas"/>
+        <DCCReference Include="ifIntegerSort.pas"/>
+        <DCCReference Include="uHeapSort.pas"/>
+        <DCCReference Include="Logging\uBaseLogger.pas"/>
+        <DCCReference Include="Logging\Unit3.pas"/>
+        <DCCReference Include="Logging\uLogging.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

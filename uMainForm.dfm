@@ -44,40 +44,43 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
   end
-  object Button1: TButton
+  object ShellSortButton: TButton
     Left = 448
     Top = 71
     Width = 113
     Height = 33
     Caption = 'Shell Sort'
     TabOrder = 0
+    OnClick = ShellSortButtonClick
   end
   object SetLengthTextBox: TEdit
     Left = 511
     Top = 8
     Width = 121
     Height = 23
+    NumbersOnly = True
     TabOrder = 1
   end
-  object Button2: TButton
+  object HeapSortButton: TButton
     Left = 448
     Top = 110
     Width = 113
     Height = 33
     Caption = 'Heap Sort'
     TabOrder = 2
+    OnClick = HeapSortButtonClick
   end
-  object GenerateSet: TButton
+  object GenerateSetButton: TButton
     Left = 448
     Top = 37
     Width = 184
     Height = 28
     Caption = 'Generate Set'
     TabOrder = 3
-    OnClick = GenerateSetClick
+    OnClick = GenerateSetButtonClick
   end
   object SetPanel: TRichEdit
-    Left = 16
+    Left = 8
     Top = 8
     Width = 393
     Height = 247
@@ -86,8 +89,6 @@ object Form1: TForm1
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
-    Lines.Strings = (
-      'SetPanel')
     ParentFont = False
     ReadOnly = True
     TabOrder = 4
@@ -102,8 +103,6 @@ object Form1: TForm1
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
-    Lines.Strings = (
-      'SetPanel')
     ParentFont = False
     ReadOnly = True
     TabOrder = 5

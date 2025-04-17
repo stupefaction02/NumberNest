@@ -1,0 +1,57 @@
+unit uMainForm;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    SetLengthTextBox: TEdit;
+    Label1: TLabel;
+    Button2: TButton;
+    GenerateSetButton: TButton;
+    SetPanel: TRichEdit;
+    Label2: TLabel;
+    LogsTextBox: TRichEdit;
+    Label3: TLabel;
+
+
+    procedure GenerateSetButtonClick(Sender: TObject);
+  private
+    TargetSet: TArray<Integer>;
+    procedure EnableUI(IsEnable: BOOLEAN);
+
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.GenerateSetButtonClick(Sender: TObject);
+begin
+  EnableUI(false);
+
+  TargetSet := Default(TArray<Integer>);
+
+  Form1.SetPanel.Text := 'lollolool';
+
+
+end;
+
+procedure TForm1.EnableUI(IsEnable: BOOLEAN);
+begin
+  SetLengthTextBox.Enabled := IsEnable;
+  Button1.Enabled := IsEnable;
+  Button2.Enabled := IsEnable;
+  GenerateSetButton.Enabled := IsEnable;
+end;
+
+end.

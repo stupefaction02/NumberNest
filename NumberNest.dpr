@@ -12,14 +12,18 @@ uses
   uShellSort in 'uShellSort.pas',
   uNumberNestCore in 'uNumberNestCore.pas',
   uMainForm in 'uMainForm.pas' {Form1},
-  uArrayHelper in 'uArrayHelper.pas';
+  uArrayHelper in 'uArrayHelper.pas',
+  ifIntegerSort in 'ifIntegerSort.pas',
+  uHeapSort in 'uHeapSort.pas',
+  uBaseLogger in 'Logging\uBaseLogger.pas',
+  Unit3 in 'Logging\Unit3.pas',
+  uLogging in 'Logging\uLogging.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

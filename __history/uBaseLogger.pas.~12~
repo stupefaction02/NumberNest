@@ -1,0 +1,71 @@
+unit uBaseLogger;
+
+interface
+
+uses
+  SysUtils, Classes;
+
+type
+  TLogLevel = (llInfo, llError, llDebug);
+
+type
+  TBaseLogger = class
+  public
+    procedure Log(const Msg: string; LogLevel: TLogLevel = llInfo);
+
+  private
+    LoggerName: string;
+
+  constructor Create(const LoggerName: string);
+
+type
+  TBaseLogProvider = class
+    public
+      procedure LogMessage(const Msg: string); Virtual; Abstract;
+  end;
+
+type
+  TListBoxLogProvider = class(TBaseLogProvider)
+    public
+      procedure LogMessage(const Msg: string); override;
+  end;
+end;
+
+implementation
+
+procedure TListBoxLogProvider.LogMessage(const Msg: string);
+begin
+
+end;
+
+
+constructor TBaseLogger.Create(const LoggerName: string);
+begin
+    Self.LoggerName := LoggerName;
+end;
+
+procedure TBaseLogger.Log(const Msg: string; LogLevel: TLogLevel = llInfo);
+var
+  LogFile: TextFile;
+  LogLine: string;
+begin
+  case LogLevel of
+    llInfo: LogLine := Format('info: %s %s', [ Self.LoggerName, Msg ]);
+    llError: LogLine := Format('error: %s %s', [ Self.LoggerName, Msg ]);
+    llDebug: LogLine := Format('dbg: %s %s', [ Self.LoggerName, Msg ]);
+  end;
+
+  try
+
+  except
+    on E: Exception do
+    begin
+      // Обработка ошибок, например, вывод сообщения в консоль
+      WriteLn('Ошибка записи в лог-файл: ', E.Message);
+    end;
+  end;
+
+end;
+
+
+end.

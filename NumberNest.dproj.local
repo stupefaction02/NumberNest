@@ -1,42 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.026,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\SortingUnit.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\ShellSort.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.579,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\SortingUnit.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\SortingUnit.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.051,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.433,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.391,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.481,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.638,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNestCore.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.218,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainUnit.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainForm.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.218,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainUnit.dfm=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainForm.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.330,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\SortingUnit.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.613,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\u_NumberNestCore.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNestCore.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.404,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainForm.dfm=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MailForm.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.890,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dproj=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.992,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dproj=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.200,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MailForm.dfm=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.481,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dfm=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.635,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\NumberNest.dproj=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.200,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MailForm.dfm=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.992,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dproj=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.218,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainUnit.dfm=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainForm.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.391,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.579,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\SortingUnit.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\SortingUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.890,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dproj=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.855,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\u_NumberNestCore.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\u_NumberNestCore.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.404,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainForm.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MailForm.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.433,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.051,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.200,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MailForm.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.635,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\NumberNest.dproj=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.613,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\u_NumberNestCore.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNestCore.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.330,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\SortingUnit.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.404,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainForm.dfm=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MailForm.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.218,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainUnit.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\MainForm.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.638,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNestCore.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.026,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\SortingUnit.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\ShellSort.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.481,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2025.04.16 20:57:07.151,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\if_ShellSort.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\ShellSort.pas</Transaction>
     <Transaction>2025.04.17 13:37:58.510,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uShellSort.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\if_ShellSort.pas</Transaction>
     <Transaction>2025.04.17 13:38:10.375,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uNumberNestCore.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\u_NumberNestCore.pas</Transaction>
-    <Transaction>2025.04.17 13:38:20.833,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uMainUnit.dfm=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\MainUnit.dfm</Transaction>
     <Transaction>2025.04.17 13:38:20.833,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uMainUnit.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\MainUnit.pas</Transaction>
+    <Transaction>2025.04.17 13:38:20.833,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uMainUnit.dfm=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\MainUnit.dfm</Transaction>
     <Transaction>2025.04.17 13:38:37.316,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uMainForm.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uMainUnit.pas</Transaction>
     <Transaction>2025.04.17 13:38:37.316,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uMainForm.dfm=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uMainUnit.dfm</Transaction>
     <Transaction>2025.04.17 13:50:56.872,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit3.pas</Transaction>
     <Transaction>2025.04.17 13:51:24.076,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uArrayHelpers.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit3.pas</Transaction>
     <Transaction>2025.04.17 13:54:21.338,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uArrayHelper.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uArrayHelpers.pas</Transaction>
+    <Transaction>2025.04.17 15:19:33.877,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit3.pas</Transaction>
+    <Transaction>2025.04.17 15:23:52.975,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\iIntegerSort.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit3.pas</Transaction>
+    <Transaction>2025.04.17 15:24:23.614,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\ifIntegerSort.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\iIntegerSort.pas</Transaction>
+    <Transaction>2025.04.17 15:42:15.840,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit3.pas</Transaction>
+    <Transaction>2025.04.17 15:42:28.625,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uHeapSort.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit3.pas</Transaction>
+    <Transaction>2025.04.17 17:42:25.348,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit3.pas</Transaction>
+    <Transaction>2025.04.17 17:43:31.188,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uBaseLogger.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit3.pas</Transaction>
+    <Transaction>2025.04.17 19:16:16.048,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit3.pas</Transaction>
+    <Transaction>2025.04.17 19:38:52.426,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit4.pas</Transaction>
+    <Transaction>2025.04.17 19:39:20.031,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Logging\Unit4.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit4.pas</Transaction>
+    <Transaction>2025.04.17 19:39:57.957,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Logging\LogLevel.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Logging\Unit4.pas</Transaction>
+    <Transaction>2025.04.17 19:40:13.642,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Logging\uLogGeneral.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Logging\LogLevel.pas</Transaction>
+    <Transaction>2025.04.17 19:40:55.476,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Logging\uLogging.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Logging\uLogGeneral.pas</Transaction>
+    <Transaction>2025.04.17 19:45:09.753,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Logging\uBaseLogger.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\uBaseLogger.pas</Transaction>
+    <Transaction>2025.04.17 19:45:19.793,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Logging\Unit3.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Unit3.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
-    <File Path="uShellSort.pas"/>
-    <File Path="uNumberNestCore.pas"/>
+    <File Path="Logging"/>
+    <File Path="Logging\uLogging.pas"/>
+    <File Path="Logging\uBaseLogger.pas"/>
+    <File Path="Logging\Unit3.pas"/>
+    <File Path="ifIntegerSort.pas"/>
+    <File Path="uArrayHelper.pas"/>
+    <File Path="uHeapSort.pas"/>
     <File Path="uMainForm.pas"/>
     <File Path="uMainForm.dfm"/>
-    <File Path="uArrayHelper.pas"/>
+    <File Path="uNumberNestCore.pas"/>
+    <File Path="uShellSort.pas"/>
   </ProjectSortOrder>
 </BorlandProject>
