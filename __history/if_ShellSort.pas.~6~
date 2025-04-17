@@ -1,0 +1,43 @@
+unit if_ShellSort;
+
+interface
+
+type
+   ShellSort = class
+   private
+      //FForm1: TForm1;
+   public
+      procedure Sort(AArray: array of Integer);
+   end;
+
+implementation
+procedure ShellSort.Sort(AArray: array of Integer);
+var
+  ArrayLength: Int64;
+  H: Integer;
+  I: Integer;
+  Temp: Integer;
+  J: Integer;
+  A: Integer;
+begin
+  ArrayLength := Length(AArray);
+
+  while H < (ArrayLength / 3) do
+    H := 3 * H + 1;
+
+  while H >= 1 do
+    begin
+      for I := H to ArrayLength do
+        begin
+            Temp := AArray[I];
+            J := I;
+
+            while (J >= H) and (AArray[J - H] > Temp) do
+              begin
+                 AArray[J] := AArray[J - H];
+                 J := J - H;
+              end;
+        end;
+    end;
+end;
+end.

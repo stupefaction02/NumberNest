@@ -1,0 +1,23 @@
+program NumberNest;
+
+uses
+  Vcl.Forms,
+  Classes,
+  SysUtils,
+  Controls,
+  Graphics,
+  Dialogs,
+  StdCtrls,
+  Grids,
+  MainUnit in '..\MainUnit.pas' {Form1},
+  SortingUnit in 'SortingUnit.pas',
+  u_NumberNestCore in 'u_NumberNestCore.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

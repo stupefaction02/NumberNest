@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.603,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\Unit1.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\Shell.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.801,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\NumberNest.Tests.dproj=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\NumberNest.Tests.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.196,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.999,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\Shell.pas=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\ShellSortTests.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.336,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\NumberNest.dproj=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\NumberNest.Tests.dproj</Transaction>
+    <Transaction>2025.04.16 19:46:55.980,C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\NumberNestTests.dproj=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\NumberNest.Tests.dproj</Transaction>
+    <Transaction>2025.04.16 21:04:12.736,=C:\Users\Ivan\Documents\Embarcadero\Studio\Projects\NumberNest\Tests\Unit2.pas</Transaction>
+  </Transactions>
+</BorlandProject>

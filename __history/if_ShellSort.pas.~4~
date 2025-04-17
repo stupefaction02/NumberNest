@@ -1,0 +1,24 @@
+unit if_ShellSort;
+
+interface
+
+type
+   ShellSort = class
+   private
+      //FForm1: TForm1;
+   public
+      procedure Sort(const AArray: array of Integer);
+   end;
+
+implementation
+procedure ShellSort.Sort(const AArray: array of Integer);
+var
+  Length: Int64;
+  H: Integer;
+begin
+  Length := Length(AArray);
+
+  //while H < (Length / 3) do
+
+end;
+end.

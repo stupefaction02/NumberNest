@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{58FCF051-E3FF-4E4A-9CE6-107B69816CC2}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="NumberNest.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Tests\NumberNestTests.dproj">
+            <Dependencies>NumberNest.dproj</Dependencies>
+        </Projects>
+        <Projects Include="NumberNest.Tests.dproj">
+            <Dependencies>NumberNest.dproj</Dependencies>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="NumberNest">
+        <MSBuild Projects="NumberNest.dproj"/>
+    </Target>
+    <Target Name="NumberNest:Clean">
+        <MSBuild Projects="NumberNest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="NumberNest:Make">
+        <MSBuild Projects="NumberNest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="NumberNestTests" DependsOnTargets="NumberNest">
+        <MSBuild Projects="Tests\NumberNestTests.dproj"/>
+    </Target>
+    <Target Name="NumberNestTests:Clean" DependsOnTargets="NumberNest:Clean">
+        <MSBuild Projects="Tests\NumberNestTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="NumberNestTests:Make" DependsOnTargets="NumberNest:Make">
+        <MSBuild Projects="Tests\NumberNestTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="NumberNest_Tests" DependsOnTargets="NumberNest">
+        <MSBuild Projects="NumberNest.Tests.dproj"/>
+    </Target>
+    <Target Name="NumberNest_Tests:Clean" DependsOnTargets="NumberNest:Clean">
+        <MSBuild Projects="NumberNest.Tests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="NumberNest_Tests:Make" DependsOnTargets="NumberNest:Make">
+        <MSBuild Projects="NumberNest.Tests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="NumberNest;NumberNestTests;NumberNest_Tests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="NumberNest:Clean;NumberNestTests:Clean;NumberNest_Tests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="NumberNest:Make;NumberNestTests:Make;NumberNest_Tests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

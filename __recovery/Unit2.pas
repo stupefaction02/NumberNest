@@ -1,0 +1,84 @@
+unit Unit2;
+
+interface
+
+uses
+  DUnitX.TestFramework, if_ShellSort;
+
+type
+  [TestFixture]
+  NumberNestTests = class
+  public
+    [Setup]
+    procedure Setup;
+    [TearDown]
+    procedure TearDown;
+
+    [Test]
+    procedure MediumSortTest;
+
+    [Test]
+    procedure SmallSortTest();
+
+  private
+    function IsInAscendingOrder(const AArray : Array of Integer) : BOOLEAN;
+    //function IsInAscendingOrder(const AArray : Array of Integer) : BOOLEAN;
+
+  end;
+
+var
+  ShellSort1: Shellsort;
+
+implementation
+
+function NumberNestTests.IsInAscendingOrder(const AArray: array of Integer): Boolean;
+var
+  Previous: Integer;
+  I: Integer;
+  ArrayItem: Integer;
+begin
+
+  for I := Low(AArray) to High(AArray) do
+    begin
+      ArrayItem := AArray[I];
+
+      if ArrayItem < Previous then
+        Exit(False)
+      else
+        Previous := ArrayItem;
+    end;
+  Exit(True);
+end;
+
+procedure NumberNestTests.Setup;
+begin
+  ShellSort1 := ShellSort.Create;
+end;
+
+procedure NumberNestTests.TearDown;
+begin
+  ShellSort1.Free;
+end;
+
+procedure NumberNestTests.MediumSortTest;
+begin
+end;
+
+procedure NumberNestTests.SmallSortTest();
+var
+  InAscenndingOrder: BOOLEAN;
+  Arranged: TArray<Integer>;
+begin
+  Arranged := TArray<Integer>.Create(100, 2, 5, 9, 10, 12);
+
+  ShellSort1.Sort(Arranged);
+
+  InAscenndingOrder := Self.IsInAscendingOrder(Arranged);
+
+  Assert.IsTrue(InAscenndingOrder);
+end;
+
+initialization
+  TDUnitX.RegisterTestFixture(NumberNestTests);
+
+end.
