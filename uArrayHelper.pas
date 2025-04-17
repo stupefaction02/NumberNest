@@ -2,6 +2,9 @@ unit uArrayHelper;
 
 interface
 
+uses
+  System.SysUtils, System.Classes;
+
 type
    TArrayHelper = class
    private
@@ -9,6 +12,7 @@ type
    public
       class function CreateRandom(Length: Int64) : TArray<Integer>;
       class function IsInAscendingOrder(const AArray: array of Integer): Boolean;
+      class function ArrayToString(const Arr: array of Integer; const Delimiter: string = ', '): String;
    end;
 
 implementation
@@ -45,4 +49,24 @@ begin
     end;
   Exit(True);
 end;
+
+class function TArrayHelper.ArrayToString(const Arr: array of Integer; const Delimiter: string = ', '): string;
+var
+  StringBuilder: TStringBuilder;
+  i: Integer;
+begin
+  StringBuilder := TStringBuilder.Create;
+  try
+    for i := Low(Arr) to High(Arr) do
+    begin
+      StringBuilder.Append(IntToStr(Arr[i]));
+      if i < High(Arr) then
+        StringBuilder.Append(Delimiter);
+    end;
+    Result := StringBuilder.ToString;
+  finally
+    StringBuilder.Free;
+  end;
+end;
+
 end.

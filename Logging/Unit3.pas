@@ -3,7 +3,7 @@ unit Unit3;
 interface
 
 uses
-  uLogging;
+  uLogging, Vcl.ComCtrls,  Vcl.StdCtrls;
 
 type
   TBaseLogProvider = class
@@ -15,12 +15,23 @@ type
   TListBoxLogProvider = class(TBaseLogProvider)
     public
       procedure LogMessage(const Msg: string); override;
+
+      constructor Create(ListBox: TListBox);
+
+    private
+       Output: TListBox;
   end;
 
 implementation
 
+constructor TListBoxLogProvider.Create(ListBox: TListBox);
+begin
+  Output := ListBox;
+end;
+
 procedure TListBoxLogProvider.LogMessage(const Msg: string);
 begin
-
+//   if Output <> nil then
+     Output.Items.Add(Msg);
 end;
 end.

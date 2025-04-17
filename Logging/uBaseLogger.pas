@@ -10,10 +10,12 @@ type
   public
     procedure Log(const Msg: string; LogLevel: TLogLevel = llInfo);
     procedure AddProvider(const Provider: TBaseLogProvider);
+
+    constructor Create(const LoggerName: string);
   private
     LoggerName: string;
     Providers: TList;
-  constructor Create(const LoggerName: string);
+
   destructor Destroy();
 end;
 
@@ -22,7 +24,7 @@ implementation
 constructor TBaseLogger.Create(const LoggerName: string);
 begin
     Self.LoggerName := LoggerName;
-    Providers := Providers.Create;
+    Providers := TList.Create;
 end;
 
 destructor TBaseLogger.Destroy();
@@ -61,7 +63,7 @@ begin
   except
     on E: Exception do
     begin
-      WriteLn('Ошибка записи в лог-файл: ', E.Message);
+      WriteLn('Error during writing: ', E.Message);
     end;
   end;
 

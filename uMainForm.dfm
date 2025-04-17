@@ -10,6 +10,7 @@ object Form1: TForm1
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
   TextHeight = 15
   object Label1: TLabel
     Left = 448
@@ -93,18 +94,12 @@ object Form1: TForm1
     ReadOnly = True
     TabOrder = 4
   end
-  object LogsTextBox: TRichEdit
+  object LogsListBox: TListBox
     Left = 432
-    Top = 260
+    Top = 261
     Width = 217
-    Height = 231
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    ReadOnly = True
+    Height = 233
+    ItemHeight = 15
     TabOrder = 5
   end
 end

@@ -1,0 +1,36 @@
+unit Unit3;
+
+interface
+
+uses
+  uLogging, Vcl.ComCtrls;
+
+type
+  TBaseLogProvider = class
+    public
+      procedure LogMessage(const Msg: string); Virtual; Abstract;
+  end;
+
+type
+  TListBoxLogProvider = class(TBaseLogProvider)
+    public
+      procedure LogMessage(const Msg: string); override;
+
+      constructor Create(RichEdit: TRichEdit);
+
+    private
+       Output: TRichEdit;
+  end;
+
+implementation
+
+constructor TBaseLogProvider.Create(RichEdit: TRichEdit);
+begin
+  Output := TextBox;
+end;
+
+procedure TListBoxLogProvider.LogMessage(const Msg: string);
+begin
+
+end;
+end.

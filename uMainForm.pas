@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, uArrayHelper,
-  uHeapSort, uShellSort;
+  uHeapSort, uShellSort, uBaseLogger, Unit3;
 
 type
   TForm1 = class(TForm)
@@ -16,19 +16,20 @@ type
     GenerateSetButton: TButton;
     SetPanel: TRichEdit;
     Label2: TLabel;
-    LogsTextBox: TRichEdit;
     Label3: TLabel;
+    LogsListBox: TListBox;
 
     procedure GenerateSetButtonClick(Sender: TObject);
     procedure ShellSortButtonClick(Sender: TObject);
-
-    constructor Create();
     procedure HeapSortButtonClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+
+
   private
     TargetSet: TArray<Integer>;
     ShellSort1: TShellSort;
     HeapSort1: THeapSort;
-
+    Logger: TBaseLogger;
     procedure EnableUI(IsEnable: BOOLEAN);
 
 
@@ -43,12 +44,6 @@ implementation
 
 {$R *.dfm}
 
-constructor TForm1.Create();
-begin
-  ShellSort1 := TShellSort.Create;
-  HeapSort1 := THeapSort.Create;
-end;
-
 procedure TForm1.GenerateSetButtonClick(Sender: TObject);
 var
   SetLength: Integer;
@@ -58,7 +53,9 @@ begin
   SetLength := StrToIntDef(SetLengthTextBox.Text, 0);
 
   TargetSet := nil;
-  TargetSet := tArrayHelper.CreateRandom(SetLength);
+  TargetSet := TArrayHelper.CreateRandom(SetLength);
+
+  Logger.Log( Format('Set of %d elements was generated', [ SetLength ]) );
 
   Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
 
@@ -93,6 +90,17 @@ begin
   ShellSortButton.Enabled := IsEnable;
   HeapSortButton.Enabled := IsEnable;
   GenerateSetButton.Enabled := IsEnable;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  ShellSort1 := TShellSort.Create;
+  HeapSort1 := THeapSort.Create;
+
+  // TODO: Make with factory
+  Logger := TBaseLogger.Create('Main');
+
+  Logger.AddProvider( TListBoxLogProvider.Create(LogsListBox) );
 end;
 
 end.
