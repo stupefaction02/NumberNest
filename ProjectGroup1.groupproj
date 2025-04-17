@@ -6,9 +6,6 @@
         <Projects Include="NumberNest.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Tests\NumberNestTests.dproj">
-            <Dependencies>NumberNest.dproj</Dependencies>
-        </Projects>
         <Projects Include="NumberNest.Tests.dproj">
             <Dependencies>NumberNest.dproj</Dependencies>
         </Projects>
@@ -29,15 +26,6 @@
     <Target Name="NumberNest:Make">
         <MSBuild Projects="NumberNest.dproj" Targets="Make"/>
     </Target>
-    <Target Name="NumberNestTests" DependsOnTargets="NumberNest">
-        <MSBuild Projects="Tests\NumberNestTests.dproj"/>
-    </Target>
-    <Target Name="NumberNestTests:Clean" DependsOnTargets="NumberNest:Clean">
-        <MSBuild Projects="Tests\NumberNestTests.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="NumberNestTests:Make" DependsOnTargets="NumberNest:Make">
-        <MSBuild Projects="Tests\NumberNestTests.dproj" Targets="Make"/>
-    </Target>
     <Target Name="NumberNest_Tests" DependsOnTargets="NumberNest">
         <MSBuild Projects="NumberNest.Tests.dproj"/>
     </Target>
@@ -48,13 +36,13 @@
         <MSBuild Projects="NumberNest.Tests.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="NumberNest;NumberNestTests;NumberNest_Tests"/>
+        <CallTarget Targets="NumberNest;NumberNest_Tests"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="NumberNest:Clean;NumberNestTests:Clean;NumberNest_Tests:Clean"/>
+        <CallTarget Targets="NumberNest:Clean;NumberNest_Tests:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="NumberNest:Make;NumberNestTests:Make;NumberNest_Tests:Make"/>
+        <CallTarget Targets="NumberNest:Make;NumberNest_Tests:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

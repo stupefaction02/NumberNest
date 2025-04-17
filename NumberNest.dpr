@@ -9,9 +9,10 @@ uses
   Dialogs,
   StdCtrls,
   Grids,
-  if_ShellSort in 'if_ShellSort.pas',
-  u_NumberNestCore in 'u_NumberNestCore.pas',
-  MainUnit in 'MainUnit.pas' {Form1};
+  uShellSort in 'uShellSort.pas',
+  uNumberNestCore in 'uNumberNestCore.pas',
+  uMainForm in 'uMainForm.pas' {Form1},
+  uArrayHelper in 'uArrayHelper.pas';
 
 {$R *.res}
 

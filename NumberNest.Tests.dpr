@@ -63,8 +63,12 @@ begin
     {$ENDIF}
   except
     on E: Exception do
-      System.Writeln(E.ClassName, ': ', E.Message);
-      System.Readln;
+    begin
+          System.Writeln(E.ClassName, ': ', E.Message);
+          System.Readln;
+    end;
+
+
   end;
 {$ENDIF}
 end.

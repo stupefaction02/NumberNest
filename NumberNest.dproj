@@ -123,12 +123,13 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="if_ShellSort.pas"/>
-        <DCCReference Include="u_NumberNestCore.pas"/>
-        <DCCReference Include="MainUnit.pas">
+        <DCCReference Include="uShellSort.pas"/>
+        <DCCReference Include="uNumberNestCore.pas"/>
+        <DCCReference Include="uMainForm.pas">
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uArrayHelper.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

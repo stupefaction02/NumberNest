@@ -1,9 +1,9 @@
-﻿unit Unit2;
+unit Unit2;
 
 interface
 
 uses
-  DUnitX.TestFramework, if_ShellSort;
+  DUnitX.TestFramework, uShellSort, uArrayHelper, uHeapSort;
 
 type
   [TestFixture]
@@ -15,68 +15,129 @@ type
     procedure TearDown;
 
     [Test]
-    procedure MediumSort;
+    procedure MediumShellSortTest;
 
     [Test]
-    procedure SmallSortTest();
+    procedure SmallShellSortTest();
 
-  private
-    function IsInAscendingOrder(const AArray : Array of Integer) : BOOLEAN;
-    //function IsInAscendingOrder(const AArray : Array of Integer) : BOOLEAN;
+    [Test]
+    procedure BigShellSortTest();
 
+
+    [Test]
+    procedure MediumHeapSortTest;
+
+    [Test]
+    procedure SmallHeapSortTest();
+
+    [Test]
+    procedure BigHeapSortTest();
   end;
 
 var
-  ShellSort1: Shellsort;
+  ShellSort1: TShellSort;
+  HeapSort1: THeapSort;
 
 implementation
 
-function NumberNestTests.IsInAscendingOrder(const AArray: array of Integer): Boolean;
-var
-  Previous: Integer;
-  I: Integer;
-  ArrayItem: Integer;
-begin
-
-  for I := Low(AArray) to High(AArray) do
-    begin
-      ArrayItem := AArray[I];
-
-      if ArrayItem < Previous then
-        Exit(False)
-      else
-        Previous := ArrayItem;
-    end;
-  Exit(True);
-end;
-
 procedure NumberNestTests.Setup;
 begin
-  ShellSort1 := ShellSort.Create;
+  ShellSort1 := TShellSort.Create;
+  HeapSort1 := THeapSort.Create;
 end;
 
 procedure NumberNestTests.TearDown;
 begin
   ShellSort1.Free;
+  HeapSort1.Free;
 end;
 
-procedure NumberNestTests.MediumSort;
-begin
-end;
-
-procedure NumberNestTests.SmallSortTest();
+procedure NumberNestTests.MediumShellSortTest;
 var
   InAscenndingOrder: BOOLEAN;
   Arranged: TArray<Integer>;
 begin
-  Arranged := TArray<Integer>.Create(100, 2, 5, 9, 10, 12);
+  Arranged := TArrayHelper.CreateRandom(25);
 
   ShellSort1.Sort(Arranged);
 
-  InAscenndingOrder := Self.IsInAscendingOrder(Arranged);
+  InAscenndingOrder := TArrayHelper.IsInAscendingOrder(Arranged);
 
   Assert.IsTrue(InAscenndingOrder);
 end;
+
+procedure NumberNestTests.SmallShellSortTest();
+var
+  InAscenndingOrder: BOOLEAN;
+  Arranged: TArray<Integer>;
+begin
+  Arranged := TArrayHelper.CreateRandom(5);
+
+  ShellSort1.Sort(Arranged);
+
+  InAscenndingOrder := TArrayHelper.IsInAscendingOrder(Arranged);
+
+  Assert.IsTrue(InAscenndingOrder);
+end;
+
+procedure NumberNestTests.BigShellSortTest();
+var
+  InAscenndingOrder: BOOLEAN;
+  Arranged: TArray<Integer>;
+begin
+  Arranged := TArrayHelper.CreateRandom(10000);
+
+  ShellSort1.Sort(Arranged);
+
+  InAscenndingOrder := TArrayHelper.IsInAscendingOrder(Arranged);
+
+  Assert.IsTrue(InAscenndingOrder);
+end;
+
+
+procedure NumberNestTests.MediumHeapSortTest();
+var
+  InAscenndingOrder: BOOLEAN;
+  Arranged: TArray<Integer>;
+begin
+  Arranged := TArrayHelper.CreateRandom(25);
+  //Arranged := TArray<Integer>.Create(2, 3, 7, 0, 10);
+
+  HeapSort1.Sort(Arranged);
+
+  InAscenndingOrder := TArrayHelper.IsInAscendingOrder(Arranged);
+
+  Assert.IsTrue(InAscenndingOrder);
+end;
+
+procedure NumberNestTests.SmallHeapSortTest();
+var
+  InAscenndingOrder: BOOLEAN;
+  Arranged: TArray<Integer>;
+begin
+  Arranged := TArrayHelper.CreateRandom(5);
+
+  HeapSort1.Sort(Arranged);
+
+  InAscenndingOrder := TArrayHelper.IsInAscendingOrder(Arranged);
+
+  Assert.IsTrue(InAscenndingOrder);
+end;
+
+procedure NumberNestTests.BigHeapSortTest();
+var
+  InAscenndingOrder: BOOLEAN;
+  Arranged: TArray<Integer>;
+begin
+  Arranged := TArrayHelper.CreateRandom(10000);
+
+  HeapSort1.Sort(Arranged);
+
+  InAscenndingOrder := TArrayHelper.IsInAscendingOrder(Arranged);
+
+  Assert.IsTrue(InAscenndingOrder);
+end;
+
 
 initialization
   TDUnitX.RegisterTestFixture(NumberNestTests);

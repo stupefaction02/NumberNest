@@ -1,0 +1,21 @@
+﻿unit uArrayHelper;
+
+interface
+
+type
+   TArrayHelper = class
+   private
+
+   public
+      function GenerateRandomArray(Length: Int64) : TArray<Integer>;
+   end;
+
+implementation
+
+function TArrayHelper.GenerateRandomArray(Length: Int64): TArray<Integer>;
+begin
+
+
+end;
+
+end.

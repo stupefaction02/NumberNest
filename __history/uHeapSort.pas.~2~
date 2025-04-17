@@ -1,0 +1,45 @@
+﻿unit uHeapSort;
+
+interface
+
+uses
+  System.Math, ifIntegerSort;
+
+type
+   THeapSort = class(TInterfacedObject, IIntegerSort)
+   private
+      //FForm1: TForm1;
+   public
+      procedure Sort(AArray: TArray<Integer>);
+   end;
+
+implementation
+procedure THeapSort.Sort(AArray: TArray<Integer>);
+var
+  ArrayLength: Int64;
+  H: Integer;
+  I: Integer;
+  Temp: Integer;
+begin
+  H := 0;
+  I := 0;
+  Temp := 0;
+
+  ArrayLength := Length(AArray);
+
+  repeat
+    begin
+        I := ArrayLength / 2 - 1;
+    end;
+  until I >= 0;
+
+  for I := H to (ArrayLength - 1) do
+
+  while H < (ArrayLength / 3) do
+    H := 3 * H + 1;
+
+  SetRoundMode(rmTruncate);
+
+
+end;
+end.

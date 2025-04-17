@@ -1,0 +1,78 @@
+unit uHeapSort;
+
+interface
+
+uses
+  System.Math, ifIntegerSort;
+
+type
+   THeapSort = class(TInterfacedObject, IIntegerSort)
+   public
+      procedure Sort(Arr: TArray<Integer>);
+   private
+      procedure Heapify(AArray: TArray<Integer>; aN: Integer; aI: Integer);
+   end;
+
+implementation
+procedure THeapSort.Sort(Arr: TArray<Integer>);
+var
+  N: Int64;
+  H: Integer;
+  I: Integer;
+  Temp: Integer;
+begin
+  H := 0;
+  I := 0;
+  Temp := 0;
+
+  SetRoundMode(rmTruncate);
+
+  N := Length(Arr);
+
+  repeat
+    begin
+        I := Round( N / 2 ) - 1;
+
+        Heapify(Arr, N, I);
+    end;
+  until I >= 0;
+
+  for i := n - 1 downto 1 do
+  begin
+    Temp := Arr[0];
+    Arr[0] := Arr[I];
+    Arr[i] := Temp;
+
+    Heapify(Arr, I, 0);
+  end;
+
+end;
+
+procedure THeapSort.Heapify(AArray: TArray<Integer>; aN: Integer; aI: Integer);
+var
+  Largest: Integer;
+  Left: Integer;
+  Right: Integer;
+  Swap: Integer;
+begin
+    Largest := aI;
+    Left := 2 * aI + 1;
+    Right := 2 * aI + 2;
+
+    if (Left < aN) and (AArray[Left] > AArray[Right]) then
+     Largest := Left;
+
+    if (Right < aN) and (AArray[Right] > AArray[Largest]) then
+     Largest := Right;
+
+    if Largest <> aI then
+    begin
+      Swap := AArray[aI];
+      AArray[aI] := AArray[Largest];
+      AArray[Largest] := Swap;
+
+      Heapify(AArray, aN, Largest);
+    end;
+
+end;
+end.

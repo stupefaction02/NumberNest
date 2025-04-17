@@ -1,0 +1,26 @@
+unit uArrayHelper;
+
+interface
+
+type
+   TArrayHelper = class
+   private
+
+   public
+      class function CreateRandom(Length: Int64) : TArray<Integer>;
+   end;
+
+implementation
+
+class function TArrayHelper.CreateRandom(Length: Int64): TArray<Integer>;
+var
+  return: TArray<Integer>;
+  i: Integer;
+begin
+    for i := 1 to Length do
+      begin
+        Return[i] := 1 + Random(100);
+      end;
+end;
+
+end.
