@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, uArrayHelper,
-  uHeapSort, uShellSort, uBaseLogger, Unit3;
+  uHeapSort, uShellSort, uBaseLogger, Unit3, Vcl.ExtCtrls, System.Math;
 
 type
   TForm1 = class(TForm)
@@ -17,12 +17,14 @@ type
     SetPanel: TRichEdit;
     Label2: TLabel;
     Label3: TLabel;
-    LogsListBox: TListBox;
+    LogsRichEdit: TRichEdit;
+    PaintBox1: TPaintBox;
 
     procedure GenerateSetButtonClick(Sender: TObject);
     procedure ShellSortButtonClick(Sender: TObject);
     procedure HeapSortButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure PaintBox1Paint(Sender: TObject);
 
 
   private
@@ -59,6 +61,8 @@ begin
 
   Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
 
+  PaintBox1.Invalidate;
+
   EnableUI(true);
 end;
 
@@ -73,6 +77,29 @@ begin
    EnableUI(true);
 end;
 
+procedure TForm1.PaintBox1Paint(Sender: TObject);
+var
+  X, Y, I, Width, Height: Integer;
+begin
+
+  if ( Length(TargetSet) < 1 ) then Exit();
+
+
+  Width := Round( PaintBox1.Width / Length(TargetSet) );
+  Height := PaintBox1.Height;
+
+  for I := 0 to Length(TargetSet) - 1 do
+  begin
+    x := I * width;
+    y := Height - (TargetSet[i] * Round(Height / 100)); // Масштабируем значение для отображения
+    PaintBox1.Canvas.Rectangle(X, Y, X + Width, Height);
+  end;
+
+  //PaintBox1.Canvas.Brush.Color := clBlack;
+  //PaintBox1.Canvas.Rectangle(0, PaintBox1.Height, 2, 5);
+  //PaintBox1.Canvas.Ellipse(10, 10, 50, 50);
+end;
+
 procedure TForm1.ShellSortButtonClick(Sender: TObject);
 begin
    EnableUI(false);
@@ -80,6 +107,8 @@ begin
    ShellSort1.Sort(TargetSet);
 
    Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
+
+   PaintBox1.Invalidate;
 
    EnableUI(true);
 end;
@@ -100,7 +129,7 @@ begin
   // TODO: Make with factory
   Logger := TBaseLogger.Create('Main');
 
-  Logger.AddProvider( TListBoxLogProvider.Create(LogsListBox) );
+  Logger.AddProvider( TListBoxLogProvider.Create(LogsRichEdit) );
 end;
 
 end.

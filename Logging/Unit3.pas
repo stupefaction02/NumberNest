@@ -16,22 +16,22 @@ type
     public
       procedure LogMessage(const Msg: string); override;
 
-      constructor Create(ListBox: TListBox);
+      constructor Create(RichEdit: TRichEdit);
 
     private
-       Output: TListBox;
+       Output: TRichEdit;
   end;
 
 implementation
 
-constructor TListBoxLogProvider.Create(ListBox: TListBox);
+constructor TListBoxLogProvider.Create(RichEdit: TRichEdit);
 begin
-  Output := ListBox;
+  Output := RichEdit;
 end;
 
 procedure TListBoxLogProvider.LogMessage(const Msg: string);
 begin
 //   if Output <> nil then
-     Output.Items.Add(Msg);
+     Output.Lines.Add(Msg);
 end;
 end.

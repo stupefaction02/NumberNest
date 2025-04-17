@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = 'NumberNest'
   ClientHeight = 502
-  ClientWidth = 663
+  ClientWidth = 694
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,14 +13,14 @@ object Form1: TForm1
   OnCreate = FormCreate
   TextHeight = 15
   object Label1: TLabel
-    Left = 448
-    Top = 11
+    Left = 432
+    Top = 8
     Width = 59
     Height = 15
     Caption = 'Set Length:'
   end
   object Label2: TLabel
-    Left = 448
+    Left = 432
     Top = 149
     Width = 182
     Height = 63
@@ -45,8 +45,15 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
   end
+  object PaintBox1: TPaintBox
+    Left = 8
+    Top = 261
+    Width = 393
+    Height = 228
+    OnPaint = PaintBox1Paint
+  end
   object ShellSortButton: TButton
-    Left = 448
+    Left = 430
     Top = 71
     Width = 113
     Height = 33
@@ -55,15 +62,15 @@ object Form1: TForm1
     OnClick = ShellSortButtonClick
   end
   object SetLengthTextBox: TEdit
-    Left = 511
-    Top = 8
+    Left = 495
+    Top = 5
     Width = 121
     Height = 23
     NumbersOnly = True
     TabOrder = 1
   end
   object HeapSortButton: TButton
-    Left = 448
+    Left = 430
     Top = 110
     Width = 113
     Height = 33
@@ -72,7 +79,7 @@ object Form1: TForm1
     OnClick = HeapSortButtonClick
   end
   object GenerateSetButton: TButton
-    Left = 448
+    Left = 430
     Top = 37
     Width = 184
     Height = 28
@@ -94,12 +101,18 @@ object Form1: TForm1
     ReadOnly = True
     TabOrder = 4
   end
-  object LogsListBox: TListBox
+  object LogsRichEdit: TRichEdit
     Left = 432
     Top = 261
-    Width = 217
+    Width = 254
     Height = 233
-    ItemHeight = 15
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
     TabOrder = 5
   end
 end
