@@ -7,13 +7,16 @@ uses
 
 type
    TShellSort = class(TInterfacedObject, IIntegerSort)
-   private
-      //FForm1: TForm1;
+
    public
+      OnSortIteration: TIntegerProc;
+
       procedure Sort(AArray: TArray<Integer>);
+
    end;
 
 implementation
+
 procedure TShellSort.Sort(AArray: TArray<Integer>);
 var
   ArrayLength: Int64;
@@ -48,10 +51,12 @@ begin
             while (J >= H) and (AArray[J - H] > Temp) do
               begin
                  AArray[J] := AArray[J - H];
+                 OnSortIteration(1);
                  J := J - H;
               end;
 
             AArray[J] := Temp;
+            OnSortIteration(1);
         end;
 
       H := Round( H / 3 );

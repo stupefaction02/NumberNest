@@ -26,7 +26,7 @@ begin
 
     for i := 0 to Length - 1 do
       begin
-        lArray[i] := 10 + Random(100);
+        lArray[i] := Random(100);
       end;
 
     Result := lArray;

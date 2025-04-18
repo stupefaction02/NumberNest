@@ -2,29 +2,33 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'NumberNest'
-  ClientHeight = 502
-  ClientWidth = 694
+  ClientHeight = 535
+  ClientWidth = 779
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   TextHeight = 15
   object Label1: TLabel
-    Left = 432
+    Left = 447
     Top = 8
     Width = 59
     Height = 15
     Caption = 'Set Length:'
   end
   object Label2: TLabel
-    Left = 432
-    Top = 149
-    Width = 182
-    Height = 63
-    Caption = 'Note:'#13#10'Shell Sort for small arrays.'#13#10'Heap sort for big arrays.'
+    Left = 447
+    Top = 128
+    Width = 312
+    Height = 105
+    Caption = 
+      'Note:'#13#10'Shell Sort for small arrays.'#13#10'Heap sort for big arrays.'#13#10 +
+      'Performance time includes render, sleeptime.'#13#10'Max length for vis' +
+      'ualiser is 489'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -33,8 +37,8 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 432
-    Top = 234
+    Left = 513
+    Top = 257
     Width = 36
     Height = 21
     Caption = 'Logs:'
@@ -45,15 +49,15 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
   end
-  object PaintBox1: TPaintBox
+  object SortingVisualiser: TPaintBox
     Left = 8
-    Top = 261
-    Width = 393
-    Height = 228
-    OnPaint = PaintBox1Paint
+    Top = 257
+    Width = 489
+    Height = 260
+    OnPaint = SortingVisualiserPaint
   end
   object ShellSortButton: TButton
-    Left = 430
+    Left = 447
     Top = 71
     Width = 113
     Height = 33
@@ -62,24 +66,25 @@ object Form1: TForm1
     OnClick = ShellSortButtonClick
   end
   object SetLengthTextBox: TEdit
-    Left = 495
+    Left = 512
     Top = 5
     Width = 121
     Height = 23
+    MaxLength = 500
     NumbersOnly = True
     TabOrder = 1
   end
   object HeapSortButton: TButton
-    Left = 430
-    Top = 110
+    Left = 566
+    Top = 71
     Width = 113
     Height = 33
     Caption = 'Heap Sort'
     TabOrder = 2
-    OnClick = HeapSortButtonClick
+    OnClick = ShellSortButtonClick
   end
   object GenerateSetButton: TButton
-    Left = 430
+    Left = 447
     Top = 37
     Width = 184
     Height = 28
@@ -90,8 +95,8 @@ object Form1: TForm1
   object SetPanel: TRichEdit
     Left = 8
     Top = 8
-    Width = 393
-    Height = 247
+    Width = 417
+    Height = 225
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -102,8 +107,8 @@ object Form1: TForm1
     TabOrder = 4
   end
   object LogsRichEdit: TRichEdit
-    Left = 432
-    Top = 261
+    Left = 513
+    Top = 284
     Width = 254
     Height = 233
     Font.Charset = RUSSIAN_CHARSET

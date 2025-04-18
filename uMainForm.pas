@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, uArrayHelper,
-  uHeapSort, uShellSort, uBaseLogger, Unit3, Vcl.ExtCtrls, System.Math;
+  uHeapSort, uShellSort, uBaseLogger, uBaseLoggerProvider, Vcl.ExtCtrls, System.TimeSpan, System.Math, System.Diagnostics;
 
 type
   TForm1 = class(TForm)
@@ -18,13 +18,14 @@ type
     Label2: TLabel;
     Label3: TLabel;
     LogsRichEdit: TRichEdit;
-    PaintBox1: TPaintBox;
+    SortingVisualiser: TPaintBox;
 
     procedure GenerateSetButtonClick(Sender: TObject);
     procedure ShellSortButtonClick(Sender: TObject);
     procedure HeapSortButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure PaintBox1Paint(Sender: TObject);
+    procedure SortingVisualiserPaint(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
 
   private
@@ -32,6 +33,12 @@ type
     ShellSort1: TShellSort;
     HeapSort1: THeapSort;
     Logger: TBaseLogger;
+    LargestSetElement: Integer;
+    MaxVisualiserLength: Integer;
+    // Thread for non UI login
+    GeneralThread: TThread;
+    procedure OnSortIteration(const Param: Integer);
+
     procedure EnableUI(IsEnable: BOOLEAN);
 
 
@@ -59,58 +66,88 @@ begin
 
   Logger.Log( Format('Set of %d elements was generated', [ SetLength ]) );
 
+  LargestSetElement := MaxIntValue( TargetSet );
+
   Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
 
-  PaintBox1.Invalidate;
+  SortingVisualiser.Invalidate;
 
   EnableUI(true);
 end;
 
 procedure TForm1.HeapSortButtonClick(Sender: TObject);
+var
+  Stopwatch: TStopwatch;
+  Elapsed: TTimeSpan;
+
 begin
    EnableUI(false);
 
-   HeapSort1.Sort(TargetSet);
+   Stopwatch := TStopwatch.StartNew;
+
+   GeneralThread := TThread.CreateAnonymousThread(procedure
+      begin
+         ShellSort1.Sort(TargetSet);
+
+         Elapsed := Stopwatch.Elapsed;
+         Logger.Log( Format('Sorted %d elements, Took %g ms', [ Length(TargetSet), Elapsed.TotalSeconds ]));
+      end
+   );
+
+   GeneralThread.Start;
+
+   Elapsed := Stopwatch.Elapsed;
 
    Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
+
+   Logger.Log( Format('Sorted %d elements, Took %d ms', [ Length(TargetSet), Elapsed.TotalSeconds ]));
 
    EnableUI(true);
 end;
 
-procedure TForm1.PaintBox1Paint(Sender: TObject);
+procedure TForm1.SortingVisualiserPaint(Sender: TObject);
 var
   X, Y, I, Width, Height: Integer;
 begin
 
   if ( Length(TargetSet) < 1 ) then Exit();
 
+  SetRoundMode(rmTruncate);
 
-  Width := Round( PaintBox1.Width / Length(TargetSet) );
-  Height := PaintBox1.Height;
+  Width := Round( SortingVisualiser.Width / Length(TargetSet) );
+  Height := SortingVisualiser.Height;
 
   for I := 0 to Length(TargetSet) - 1 do
-  begin
-    x := I * width;
-    y := Height - (TargetSet[i] * Round(Height / 100)); // Масштабируем значение для отображения
-    PaintBox1.Canvas.Rectangle(X, Y, X + Width, Height);
-  end;
+    begin
+      X := I * Width;
+      Y := Height - (TargetSet[i] * Round(Height / LargestSetElement));
+      SortingVisualiser.Canvas.Rectangle(X, Y, X + Width, Height);
+    end;
 
-  //PaintBox1.Canvas.Brush.Color := clBlack;
-  //PaintBox1.Canvas.Rectangle(0, PaintBox1.Height, 2, 5);
-  //PaintBox1.Canvas.Ellipse(10, 10, 50, 50);
 end;
 
 procedure TForm1.ShellSortButtonClick(Sender: TObject);
+var
+  Stopwatch: TStopwatch;
+  Elapsed: TTimeSpan;
+
 begin
    EnableUI(false);
 
-   ShellSort1.Sort(TargetSet);
+   Stopwatch := TStopwatch.StartNew;
 
-   Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
+   GeneralThread := TThread.CreateAnonymousThread(procedure
+      begin
+         ShellSort1.Sort(TargetSet);
 
-   PaintBox1.Invalidate;
+         EnableUI(true);
 
-   EnableUI(true);
+         Elapsed := Stopwatch.Elapsed;
+         Logger.Log( Format('Sorted %d elements, Took %g ms', [ Length(TargetSet), Elapsed.TotalSeconds ]));
+      end
+   );
+
+   GeneralThread.Start;
 end;
 
 procedure TForm1.EnableUI(IsEnable: BOOLEAN);
@@ -121,15 +158,50 @@ begin
   GenerateSetButton.Enabled := IsEnable;
 end;
 
+procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Logger.Log('Closing.');
+
+  Logger.Free;
+  TargetSet := nil;
+  ShellSort1.Free;
+  HeapSort1.Free;
+end;
+
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   ShellSort1 := TShellSort.Create;
   HeapSort1 := THeapSort.Create;
 
+  ShellSort1.OnSortIteration := OnSortIteration;
+  HeapSort1.OnSortIteration := OnSortIteration;
+
+  Form1.DoubleBuffered := true;
+
+  SortingVisualiser.Canvas.Brush.Color := clBlack;
+
+  MaxVisualiserLength := SortingVisualiser.Width;
+
   // TODO: Make with factory
   Logger := TBaseLogger.Create('Main');
 
   Logger.AddProvider( TListBoxLogProvider.Create(LogsRichEdit) );
+end;
+
+procedure TForm1.OnSortIteration(const Param: Integer);
+begin
+   // Post execution to UI thread
+   TThread.Synchronize(nil,
+     procedure
+       begin
+        Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
+
+        if Length(TargetSet) >= MaxVisualiserLength then
+          SortingVisualiser.Invalidate;
+       end
+   );
+
+   Sleep(10);
 end;
 
 end.

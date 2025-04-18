@@ -8,6 +8,8 @@ uses
 type
    THeapSort = class(TInterfacedObject, IIntegerSort)
    public
+      OnSortIteration: TIntegerProc;
+
       procedure Sort(Arr: TArray<Integer>);
    private
       procedure Heapify(AArray: TArray<Integer>; aN: Integer; aI: Integer);

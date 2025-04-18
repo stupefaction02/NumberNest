@@ -3,13 +3,13 @@ unit uBaseLogger;
 interface
 
 uses
-  SysUtils, Classes, Unit3, uLogging;
+  SysUtils, Classes, uBaseLoggerProvider, uLogging;
 
 type
   TBaseLogger = class
   public
     procedure Log(const Msg: string; LogLevel: TLogLevel = llInfo);
-    procedure AddProvider(const Provider: TBaseLogProvider);
+    procedure AddProvider(const Provider: TBaseLoggerProvider);
 
     constructor Create(const LoggerName: string);
   private
@@ -33,12 +33,12 @@ var
 begin
   for I := Providers.Count - 1 downto 0 do
     begin
-      TBaseLogProvider(Providers[I]).Free;
+      TBaseLoggerProvider(Providers[I]).Free;
     end;
   Providers.Free;
 end;
 
-procedure TBaseLogger.AddProvider(const Provider: TBaseLogProvider);
+procedure TBaseLogger.AddProvider(const Provider: TBaseLoggerProvider);
 begin
     Providers.Add(Provider);
 end;
@@ -50,15 +50,15 @@ var
   I: Integer;
 begin
   case LogLevel of
-    llInfo: LogLine := Format('info: %s %s', [ Self.LoggerName, Msg ]);
-    llError: LogLine := Format('error: %s %s', [ Self.LoggerName, Msg ]);
-    llDebug: LogLine := Format('dbg: %s %s', [ Self.LoggerName, Msg ]);
+    llInfo: LogLine := Format('info: [%s] %s', [ Self.LoggerName, Msg ]);
+    llError: LogLine := Format('error: [%s] %s', [ Self.LoggerName, Msg ]);
+    llDebug: LogLine := Format('dbg: [%s] %s', [ Self.LoggerName, Msg ]);
   end;
 
   try
      for I := Providers.Count - 1 downto 0 do
         begin
-          TBaseLogProvider(Providers[I]).LogMessage(LogLine);
+          TBaseLoggerProvider(Providers[I]).LogMessage(LogLine);
         end;
   except
     on E: Exception do

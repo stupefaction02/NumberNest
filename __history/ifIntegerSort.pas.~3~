@@ -1,0 +1,15 @@
+﻿unit ifIntegerSort;
+
+interface
+
+type
+  TIntegerFunction = procedure(const Param: Integer) of object;
+
+type
+  IIntegerSort = Interface
+  procedure Sort(AArray: TArray<Integer>);
+end;
+
+implementation
+
+end.
