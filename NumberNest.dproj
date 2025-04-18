@@ -124,7 +124,6 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="uShellSort.pas"/>
-        <DCCReference Include="uNumberNestCore.pas"/>
         <DCCReference Include="uMainForm.pas">
             <Form>Form1</Form>
             <FormType>dfm</FormType>
@@ -133,8 +132,9 @@
         <DCCReference Include="ifIntegerSort.pas"/>
         <DCCReference Include="uHeapSort.pas"/>
         <DCCReference Include="Logging\uBaseLogger.pas"/>
-        <DCCReference Include="Logging\Unit3.pas"/>
+        <DCCReference Include="Logging\uBaseLoggerProvider.pas"/>
         <DCCReference Include="Logging\uLogging.pas"/>
+        <DCCReference Include="uThreading.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
