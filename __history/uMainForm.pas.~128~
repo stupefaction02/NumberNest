@@ -38,7 +38,7 @@ type
     MaxVisualiserLength: Integer;
     TaskScheduler: TThreadScheduler;
 
-    procedure SortIterationCallbackHandler(const Param: Integer);
+    procedure SortIterationCallbackHandler();
 
     procedure EnableUI(IsEnable: BOOLEAN);
   end;
@@ -139,9 +139,13 @@ begin
   Logger.Log('Closing.');
 
   Logger.Free;
+
+  TaskScheduler.Free;
+
+  HeapSort1.SortIterationCallback := nil;
+  ShellSort1.SortIterationCallback := nil;
+
   TargetSet := nil;
-  ShellSort1.Free;
-  HeapSort1.Free;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -150,7 +154,7 @@ begin
   HeapSort1 := THeapSort.Create;
 
   ShellSort1.SortIterationCallback := SortIterationCallbackHandler;
-  HeapSort1.OnSortIteration := SortIterationCallbackHandler;
+  HeapSort1.SortIterationCallback := SortIterationCallbackHandler;
 
   Form1.DoubleBuffered := true;
 
@@ -170,7 +174,7 @@ begin
 
 end;
 
-procedure TForm1.SortIterationCallbackHandler(const Param: Integer);
+procedure TForm1.SortIterationCallbackHandler();
 begin
    // Post execution to UI thread
    TThread.Synchronize(nil,

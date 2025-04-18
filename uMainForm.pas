@@ -26,7 +26,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure SortingVisualiserPaint(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure StartSort(SortUnit: IIntegerSort);
+    procedure StartSort(SortProc: TProc);
     procedure ShellSortButtonClick(Sender: TObject);
 
   private
@@ -74,15 +74,23 @@ end;
 
 procedure TForm1.HeapSortButtonClick(Sender: TObject);
 begin
-  StartSort(HeapSort1);
+  StartSort(procedure
+    begin
+       HeapSort1.Sort(TargetSet);
+    end
+  );
 end;
 
 procedure TForm1.ShellSortButtonClick(Sender: TObject);
 begin
-   StartSort(ShellSort1);
+  StartSort(procedure
+    begin
+       ShellSort1.Sort(TargetSet);
+    end
+  );
 end;
 
-procedure TForm1.StartSort(SortUnit: IIntegerSort);
+procedure TForm1.StartSort(SortProc: TProc);
 var
   Stopwatch: TStopwatch;
   Elapsed: TTimeSpan;
@@ -94,7 +102,7 @@ begin
 
    TaskScheduler.ExecuteNow(procedure
        begin
-             SortUnit.Sort(TargetSet);
+             SortProc();
 
              EnableUI(true);
 
@@ -142,9 +150,6 @@ begin
 
   TaskScheduler.Free;
 
-  HeapSort1.SortIterationCallback := nil;
-  ShellSort1.SortIterationCallback := nil;
-
   TargetSet := nil;
 end;
 
@@ -167,11 +172,7 @@ begin
 
   Logger.AddProvider( TListBoxLogProvider.Create(LogsRichEdit) );
 
-  //GeneralThread := TThread.Create;
-
   TaskScheduler := TThreadScheduler.Create();
-
-
 end;
 
 procedure TForm1.SortIterationCallbackHandler();

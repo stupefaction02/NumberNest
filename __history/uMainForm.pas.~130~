@@ -26,7 +26,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure SortingVisualiserPaint(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure StartSort(SortUnit: IIntegerSort);
+    procedure StartSort(SortProc: TProc);
+    procedure ShellSortButtonClick(Sender: TObject);
 
   private
     TargetSet: TArray<Integer>;
@@ -36,7 +37,8 @@ type
     LargestSetElement: Integer;
     MaxVisualiserLength: Integer;
     TaskScheduler: TThreadScheduler;
-    procedure OnSortIteration(const Param: Integer);
+
+    procedure SortIterationCallbackHandler();
 
     procedure EnableUI(IsEnable: BOOLEAN);
   end;
@@ -71,13 +73,45 @@ begin
 end;
 
 procedure TForm1.HeapSortButtonClick(Sender: TObject);
+begin
+  StartSort(procedure
+    begin
+       HeapSort1.Sort(TargetSet);
+    end
+  );
+end;
+
+procedure TForm1.ShellSortButtonClick(Sender: TObject);
+begin
+  StartSort(procedure
+    begin
+       ShellSort1.Sort(TargetSet);
+    end
+  );
+end;
+
+procedure TForm1.StartSort(SortProc: TProc);
 var
   Stopwatch: TStopwatch;
   Elapsed: TTimeSpan;
 
 begin
+   EnableUI(false);
 
+   Stopwatch := TStopwatch.StartNew;
+
+   TaskScheduler.ExecuteNow(procedure
+       begin
+             SortProc();
+
+             EnableUI(true);
+
+             Elapsed := Stopwatch.Elapsed;
+             Logger.Log( Format('Sorted %d elements, Took %g ms', [ Length(TargetSet), Elapsed.TotalSeconds ]));
+       end);
 end;
+
+
 
 procedure TForm1.SortingVisualiserPaint(Sender: TObject);
 var
@@ -100,27 +134,6 @@ begin
 
 end;
 
-procedure TForm1.StartSort(SortUnit: IIntegerSort);
-var
-  Stopwatch: TStopwatch;
-  Elapsed: TTimeSpan;
-
-begin
-   EnableUI(false);
-
-   Stopwatch := TStopwatch.StartNew;
-
-   TaskScheduler.ExecuteNow(procedure
-       begin
-             SortUnit.Sort(TargetSet);
-
-             EnableUI(true);
-
-             Elapsed := Stopwatch.Elapsed;
-             Logger.Log( Format('Sorted %d elements, Took %g ms', [ Length(TargetSet), Elapsed.TotalSeconds ]));
-       end);
-end;
-
 procedure TForm1.EnableUI(IsEnable: BOOLEAN);
 begin
   SetLengthTextBox.Enabled := IsEnable;
@@ -134,9 +147,10 @@ begin
   Logger.Log('Closing.');
 
   Logger.Free;
+
+  TaskScheduler.Free;
+
   TargetSet := nil;
-  ShellSort1.Free;
-  HeapSort1.Free;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -144,8 +158,8 @@ begin
   ShellSort1 := TShellSort.Create;
   HeapSort1 := THeapSort.Create;
 
-  ShellSort1.OnSortIteration := OnSortIteration;
-  HeapSort1.OnSortIteration := OnSortIteration;
+  ShellSort1.SortIterationCallback := SortIterationCallbackHandler;
+  HeapSort1.SortIterationCallback := SortIterationCallbackHandler;
 
   Form1.DoubleBuffered := true;
 
@@ -165,7 +179,7 @@ begin
 
 end;
 
-procedure TForm1.OnSortIteration(const Param: Integer);
+procedure TForm1.SortIterationCallbackHandler();
 begin
    // Post execution to UI thread
    TThread.Synchronize(nil,
