@@ -3,14 +3,15 @@ unit uHeapSort;
 interface
 
 uses
-  System.Math, ifIntegerSort;
+  System.Math, System.SysUtils, ifIntegerSort;
 
 type
    THeapSort = class(TInterfacedObject, IIntegerSort)
    public
-      OnSortIteration: TIntegerProc;
+      SortIterationCallback: TProc;
 
       procedure Sort(Arr: TArray<Integer>);
+      procedure OnIteration();
    private
       procedure Heapify(AArray: TArray<Integer>; aN: Integer; aI: Integer);
    end;
@@ -39,7 +40,9 @@ begin
     begin
       Temp := Arr[0];
       Arr[0] := Arr[I];
+      OnIteration();
       Arr[i] := Temp;
+      OnIteration();
 
       Heapify(Arr, I, 0);
     end;
@@ -66,10 +69,19 @@ begin
     begin
       Swap := AArray[aI];
       AArray[aI] := AArray[Largest];
+      OnIteration();
       AArray[Largest] := Swap;
+      OnIteration();
 
       Heapify(AArray, aN, Largest);
     end;
 
 end;
+
+procedure THeapSort.OnIteration();
+begin
+   if Assigned(SortIterationCallback) then
+     SortIterationCallback();
+end;
+
 end.

@@ -3,9 +3,10 @@ unit uMainForm;
 interface
 
 uses
+  uBaseLogger, uBaseLoggerProvider, uThreading, uArrayHelper, ifIntegerSort,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, uArrayHelper,
-  uHeapSort, uShellSort, uBaseLogger, uBaseLoggerProvider, Vcl.ExtCtrls, System.TimeSpan, System.Math, System.Diagnostics;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls,
+  uHeapSort, uShellSort, Vcl.ExtCtrls, System.TimeSpan, System.Math, System.Diagnostics;
 
 type
   TForm1 = class(TForm)
@@ -21,12 +22,12 @@ type
     SortingVisualiser: TPaintBox;
 
     procedure GenerateSetButtonClick(Sender: TObject);
-    procedure ShellSortButtonClick(Sender: TObject);
     procedure HeapSortButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SortingVisualiserPaint(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-
+    procedure StartSort(SortUnit: IIntegerSort);
+    procedure ShellSortButtonClick(Sender: TObject);
 
   private
     TargetSet: TArray<Integer>;
@@ -35,15 +36,11 @@ type
     Logger: TBaseLogger;
     LargestSetElement: Integer;
     MaxVisualiserLength: Integer;
-    // Thread for non UI login
-    GeneralThread: TThread;
-    procedure OnSortIteration(const Param: Integer);
+    TaskScheduler: TThreadScheduler;
+
+    procedure SortIterationCallbackHandler();
 
     procedure EnableUI(IsEnable: BOOLEAN);
-
-
-  public
-    { Public declarations }
   end;
 
 var
@@ -76,6 +73,16 @@ begin
 end;
 
 procedure TForm1.HeapSortButtonClick(Sender: TObject);
+begin
+  StartSort(HeapSort1);
+end;
+
+procedure TForm1.ShellSortButtonClick(Sender: TObject);
+begin
+   StartSort(ShellSort1);
+end;
+
+procedure TForm1.StartSort(SortUnit: IIntegerSort);
 var
   Stopwatch: TStopwatch;
   Elapsed: TTimeSpan;
@@ -85,25 +92,18 @@ begin
 
    Stopwatch := TStopwatch.StartNew;
 
-   GeneralThread := TThread.CreateAnonymousThread(procedure
-      begin
-         ShellSort1.Sort(TargetSet);
+   TaskScheduler.ExecuteNow(procedure
+       begin
+             SortUnit.Sort(TargetSet);
 
-         Elapsed := Stopwatch.Elapsed;
-         Logger.Log( Format('Sorted %d elements, Took %g ms', [ Length(TargetSet), Elapsed.TotalSeconds ]));
-      end
-   );
+             EnableUI(true);
 
-   GeneralThread.Start;
-
-   Elapsed := Stopwatch.Elapsed;
-
-   Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
-
-   Logger.Log( Format('Sorted %d elements, Took %d ms', [ Length(TargetSet), Elapsed.TotalSeconds ]));
-
-   EnableUI(true);
+             Elapsed := Stopwatch.Elapsed;
+             Logger.Log( Format('Sorted %d elements, Took %g ms', [ Length(TargetSet), Elapsed.TotalSeconds ]));
+       end);
 end;
+
+
 
 procedure TForm1.SortingVisualiserPaint(Sender: TObject);
 var
@@ -126,30 +126,6 @@ begin
 
 end;
 
-procedure TForm1.ShellSortButtonClick(Sender: TObject);
-var
-  Stopwatch: TStopwatch;
-  Elapsed: TTimeSpan;
-
-begin
-   EnableUI(false);
-
-   Stopwatch := TStopwatch.StartNew;
-
-   GeneralThread := TThread.CreateAnonymousThread(procedure
-      begin
-         ShellSort1.Sort(TargetSet);
-
-         EnableUI(true);
-
-         Elapsed := Stopwatch.Elapsed;
-         Logger.Log( Format('Sorted %d elements, Took %g ms', [ Length(TargetSet), Elapsed.TotalSeconds ]));
-      end
-   );
-
-   GeneralThread.Start;
-end;
-
 procedure TForm1.EnableUI(IsEnable: BOOLEAN);
 begin
   SetLengthTextBox.Enabled := IsEnable;
@@ -163,9 +139,13 @@ begin
   Logger.Log('Closing.');
 
   Logger.Free;
+
+  TaskScheduler.Free;
+
+  HeapSort1.SortIterationCallback := nil;
+  ShellSort1.SortIterationCallback := nil;
+
   TargetSet := nil;
-  ShellSort1.Free;
-  HeapSort1.Free;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -173,8 +153,8 @@ begin
   ShellSort1 := TShellSort.Create;
   HeapSort1 := THeapSort.Create;
 
-  ShellSort1.OnSortIteration := OnSortIteration;
-  HeapSort1.OnSortIteration := OnSortIteration;
+  ShellSort1.SortIterationCallback := SortIterationCallbackHandler;
+  HeapSort1.SortIterationCallback := SortIterationCallbackHandler;
 
   Form1.DoubleBuffered := true;
 
@@ -186,9 +166,15 @@ begin
   Logger := TBaseLogger.Create('Main');
 
   Logger.AddProvider( TListBoxLogProvider.Create(LogsRichEdit) );
+
+  //GeneralThread := TThread.Create;
+
+  TaskScheduler := TThreadScheduler.Create();
+
+
 end;
 
-procedure TForm1.OnSortIteration(const Param: Integer);
+procedure TForm1.SortIterationCallbackHandler();
 begin
    // Post execution to UI thread
    TThread.Synchronize(nil,
@@ -196,7 +182,7 @@ begin
        begin
         Form1.SetPanel.Text := TArrayHelper.ArrayTostring(TargetSet);
 
-        if Length(TargetSet) >= MaxVisualiserLength then
+        if Length(TargetSet) <= MaxVisualiserLength then
           SortingVisualiser.Invalidate;
        end
    );

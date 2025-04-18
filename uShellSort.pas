@@ -3,19 +3,25 @@ unit uShellSort;
 interface
 
 uses
-  System.Math, ifIntegerSort;
+  System.Math, ifIntegerSort, System.SysUtils;
 
 type
    TShellSort = class(TInterfacedObject, IIntegerSort)
 
    public
-      OnSortIteration: TIntegerProc;
+      SortIterationCallback: TProc;
 
       procedure Sort(AArray: TArray<Integer>);
-
+      procedure OnIteration();
    end;
 
 implementation
+
+procedure TShellSort.OnIteration();
+begin
+   if Assigned(SortIterationCallback) then
+     SortIterationCallback();
+end;
 
 procedure TShellSort.Sort(AArray: TArray<Integer>);
 var
@@ -51,15 +57,16 @@ begin
             while (J >= H) and (AArray[J - H] > Temp) do
               begin
                  AArray[J] := AArray[J - H];
-                 OnSortIteration(1);
+                 OnIteration();
                  J := J - H;
               end;
 
             AArray[J] := Temp;
-            OnSortIteration(1);
+            OnIteration();
         end;
 
       H := Round( H / 3 );
     end;
 end;
+
 end.

@@ -81,7 +81,7 @@ object Form1: TForm1
     Height = 33
     Caption = 'Heap Sort'
     TabOrder = 2
-    OnClick = ShellSortButtonClick
+    OnClick = HeapSortButtonClick
   end
   object GenerateSetButton: TButton
     Left = 447
